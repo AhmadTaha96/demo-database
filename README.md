@@ -35,4 +35,4 @@ To import the database from the provided SQL file,  We use the following command
 
 2. **View Tables**: To see all tables information in the database, We use: ```\dt```
 
-We exported the result of each query as csv file to be included in the file Queries.md using ```\copy``` command.
+We exported the result of each query as csv file to be included in the file Queries.md using ```\copy``` command, For simplicity we will limit the results of some queries to small number as the number of rows in the ouput may be large.
