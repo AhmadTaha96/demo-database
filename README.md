@@ -10,7 +10,7 @@ The database is sourced from [demo-small-en.zip](https://edu.postgrespro.com/dem
 
 ### Schema and Tables
 
-The schema includes multiple tables such as `flights`, `tickets`, `bookings`, `aircrafts_data`, `airports`, `seats`, and more. Each table is designed to represent different entities in the flight booking and management system:
+The schema includes multiple tables such as `flights`, `tickets`, `bookings`, `aircrafts_data`, `airports`, `seats`, and more:
 
 - **Flights**: Contains details about flight schedules, statuses, and routes.
 - **Tickets**: Stores information about passenger tickets.
