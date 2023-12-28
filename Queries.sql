@@ -1,18 +1,18 @@
--- ** Find all flights departing after 8 PM (randomly selected time)
+-- ** Query 1: Find all flights departing after 8 PM (randomly selected time)
 
 SELECT *
 FROM flights
 WHERE scheduled_departure::time > '20:00:00';
 
 
--- ** Count the number of canceled flights.
+-- ** Query 2: Count the number of canceled flights.
 
 SELECT COUNT(*) AS cancelled_flights
 FROM flights
 WHERE status = 'Cancelled';
 
 
--- ** List all airports with more than one flight departing on a given day (specified).
+-- ** Query 3: List all airports with more than one flight departing on a given day (specified).
 
 SELECT departure_airport, COUNT(*) AS number_of_departures
 FROM flights
@@ -21,7 +21,7 @@ GROUP BY departure_airport
 HAVING COUNT(*) > 1 limit 10;
 
 
--- ** Identify the most frequent travelers based on the number of tickets.
+-- ** Query 4: Identify the most frequent travelers based on the number of tickets.
 
 SELECT passenger_name, COUNT(*) AS ticket_count
 FROM tickets
@@ -30,7 +30,7 @@ ORDER BY ticket_count DESC
 LIMIT 10;
 
 
--- ** Count number of passengers for each travel class (fare_conditions) for all flights
+-- ** Query 5: Count number of passengers for each travel class (fare_conditions) for all flights
 
 SELECT flight_id, fare_conditions, COUNT(*) as passenger_count
 FROM tickets 
@@ -38,7 +38,7 @@ JOIN ticket_flights ON tickets.ticket_no = ticket_flights.ticket_no
 GROUP BY flight_id, fare_conditions LIMIT 15;
 
 
--- ** Count number of passengers for each travel class (fare_conditions) on flight 7784 (specified)
+-- ** Query 6: Count number of passengers for each travel class (fare_conditions) on flight 7784 (specified)
 
 SELECT fare_conditions, COUNT(*) as passenger_count
 FROM tickets 
@@ -47,7 +47,7 @@ WHERE ticket_flights.flight_id = 7784
 GROUP BY fare_conditions;
 
 
--- ** Which day of the week has the highest number of flights
+-- ** Query 7: Which day of the week has the highest number of flights
 
 SELECT EXTRACT(DOW FROM scheduled_departure) AS day_of_week, COUNT(*) AS number_of_flights
 FROM flights
@@ -55,7 +55,7 @@ GROUP BY day_of_week
 ORDER BY number_of_flights DESC;
 
 
--- ** Calculate number of seats for each aircraft model
+-- ** Query 8: Calculate number of seats for each aircraft model
 
 SELECT ad.model->>'en' AS model_en, COUNT(s.seat_no) AS number_of_seats
 FROM aircrafts_data ad
@@ -65,7 +65,7 @@ ORDER BY number_of_seats DESC;
 
 
 
--- ** Find the Average Flight Duration for Each Aircraft Model
+-- ** Query 9: Find the Average Flight Duration for Each Aircraft Model
 
 SELECT ad.model->>'en' AS model_en, AVG(EXTRACT(EPOCH FROM (f.actual_arrival - f.actual_departure))/3600) AS average_duration_hours
 FROM aircrafts_data ad
@@ -73,7 +73,7 @@ JOIN flights f ON ad.aircraft_code = f.aircraft_code
 GROUP BY ad.model;
 
 
--- ** Identify Flights with Seat Occupancy percentage
+-- ** Query 10: Identify Flights with Seat Occupancy percentage
 
 WITH FlightSeats AS (
     SELECT f.flight_id, COUNT(s.seat_no) AS total_seats
@@ -96,7 +96,7 @@ LIMIT 20;
 
 
 
--- ** Find Passenger names who travlled for more than 3 diffrent destinations
+-- ** Query 11: Find Passenger names who travlled for more than 3 diffrent destinations
 
 SELECT passenger_name, COUNT(DISTINCT arrival_airport) AS destination_count
 FROM tickets 
@@ -108,7 +108,7 @@ limit 10;
 
 
 
--- ** Distrbution on travel class for each denstiantion
+-- ** Query 12: Distrbution on travel class for each denstiantion
 
 SELECT arrival_airport, fare_conditions, COUNT(*) as count
 FROM flights 
@@ -118,7 +118,7 @@ ORDER BY arrival_airport, count DESC
 LIMIT 10;
 
 
--- ** Find  day with min number of flights
+-- ** Query 13: Find  day with min number of flights
 
 SELECT EXTRACT(DOW FROM scheduled_departure) AS day_of_week, COUNT(*) AS number_of_flights
 FROM flights
