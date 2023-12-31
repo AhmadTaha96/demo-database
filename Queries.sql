@@ -32,19 +32,19 @@ LIMIT 10;
 
 -- ** Query 5: Count number of passengers for each travel class (fare_conditions) for all flights
 
-SELECT flight_id, fare_conditions, COUNT(*) as passenger_count
-FROM tickets 
-JOIN ticket_flights ON tickets.ticket_no = ticket_flights.ticket_no 
-GROUP BY flight_id, fare_conditions LIMIT 15;
-
-
--- ** Query 6: Count number of passengers for each travel class (fare_conditions) on flight 7784 (specified)
-
 SELECT fare_conditions, COUNT(*) as passenger_count
 FROM tickets 
 JOIN ticket_flights ON tickets.ticket_no = ticket_flights.ticket_no 
 WHERE ticket_flights.flight_id = 7784
 GROUP BY fare_conditions;
+
+
+-- ** Query 6: Count number of passengers for each travel class (fare_conditions) on flight 7784 (specified)
+
+SELECT flight_id, fare_conditions, COUNT(*) as passenger_count
+FROM tickets 
+JOIN ticket_flights ON tickets.ticket_no = ticket_flights.ticket_no 
+GROUP BY flight_id, fare_conditions LIMIT 15;
 
 
 -- ** Query 7: Which day of the week has the highest number of flights
