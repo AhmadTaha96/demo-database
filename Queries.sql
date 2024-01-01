@@ -104,7 +104,7 @@ JOIN ticket_flights ON tickets.ticket_no = ticket_flights.ticket_no
 JOIN flights ON ticket_flights.flight_id = flights.flight_id
 GROUP BY passenger_name
 HAVING COUNT(DISTINCT arrival_airport) > 3
-limit 10;
+LIMIT 10;
 
 
 
